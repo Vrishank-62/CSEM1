@@ -1,0 +1,391 @@
+/*
+CO7 - Activity Set 1 - P1
+
+Create a C program that employs a function to calculate the
+square of any given number. The program should ask the input
+within the main function, then transfer the calculated result
+back to the main function for display.
+*/
+
+int getSquare(int n)
+{
+    return n * n;
+}
+int main()
+{
+    int n;
+    printf("Enter the value of n: ");
+    scanf("%d",&n);
+    printf("Square of %d is %d",n,getSquare(n));
+}
+
+
+/*
+CO7 - Activity Set 1 - P2
+
+Write a program in C to check if a given number is even
+or odd using the function. Print the result in the main
+function.
+*/
+
+int evenOdd(int n)
+{
+    return n % 2;
+}
+int main()
+{
+    int n;
+    printf("Enter the value of n: ");
+    scanf("%d",&n);
+    if(evenOdd(n))
+        printf("%d is ODD.",n);
+    else
+        printf("%d is EVEN.",n);
+}
+
+
+/*
+CO7 - Activity Set 1 - P3
+
+Write a function to calculate the factorial value of any
+integer entered through the keyboard. Print the result back
+in the main function.
+*/
+
+int factorial(int n)
+{
+    int f = 1;
+    for(int i = 1; i <= n; i++)
+        f *= i;
+    return f;
+}
+int main()
+{
+    int n;
+    printf("Enter the value of n: ");
+    scanf("%d",&n);
+    printf("Factorial of %d is %d.",n,factorial(n));
+}
+
+
+/*
+CO7 - Activity Set 1 - P4
+
+Any year is entered through the keyboard. Write a function
+to determine whether the year is a leap year or not. Call this
+function from main( ) and print the results in main( ).
+*/
+
+int leapYear(int n)
+{
+    return ((n % 400 == 0) || (n % 100 != 0 && n % 4 == 0));
+}
+int main()
+{
+    int n;
+    printf("Enter year: ");
+    scanf("%d",&n);
+    if(leapYear(n))
+        printf("%d is a leap year.",n);
+    else
+        printf("%d is not a leap year.",n);
+}
+
+
+/*
+CO7 - Activity Set 1 - P5
+
+A positive integer is entered through the keyboard.
+Write a function to obtain the prime factors of this number.
+Call this function from main( ) and display the results.
+*/
+
+void primeNumbers(int n)
+{
+    while(!(n % 2))
+    {
+        printf("2 ");
+        n /= 2;
+    }
+    for(int i = 3; i <= n/2; i += 2)
+    {
+        while(!(n % i))
+        {
+            printf("%d ", i);
+            n /= i;
+        }
+    }
+    if(n > 2)
+        printf("%d", n);
+}
+int main()
+{
+    int n;
+    printf("Enter a number: ");
+    scanf("%d",&n);
+    primeNumbers(n);
+}
+
+
+/*
+CO7 - Activity Set 1 - P6
+
+Write a function that receives 5 integers and returns the sum,
+average and standard deviation of these numbers. Call this
+function from main( ) and print the results.
+*/
+#include<math.h>
+int sum(int *a, int n)
+{
+    int sum = 0;
+    for(int i = 0; i < n; i++)
+        sum += a[i];
+    return sum;
+}
+
+float average(int *a, int n)
+{
+    return (float)sum(a,n)/n;
+}
+
+float standardDeviation(int *a, int n)
+{
+    float v = 0, avg = average(a,n);
+    for(int i = 0; i < n; i++)
+        v += (avg - a[i]) * (avg - a[i]);
+    v /= n;
+    return sqrt(v);
+}
+
+int main()
+{
+    int n;
+    printf("Enter the number of elements: ");
+    scanf("%d",&n);
+    int a[n];
+    for(int i = 0; i < n; i++)
+    {
+        printf("Enter a[%d]: ", i);
+        scanf("%d",&a[i]);
+    }
+
+    printf("\nSum: %d", sum(a,n));
+    printf("\nAverage: %f", average(a,n));
+    printf("\nStandard deviation: %f",standardDeviation(a,n));
+}
+
+
+/*
+CO7 - Activity Set 1 - P7
+
+Write a function that receives marks received by a student
+in 3 subjects and returns the average and percentage of
+these marks. Call this function from main() and print the
+results.
+*/
+#include<math.h>
+void result(float *a, int n, int max, float *r)
+{
+    for(int i = 0; i < n; i++)
+        r[0] += a[i];
+    r[0] /= n;
+    r[1] = r[0] * 100 / max;
+    return r;
+}
+
+int main()
+{
+    int n,max;
+    printf("Enter the number of subjects: ");
+    scanf("%d",&n);
+    printf("Enter maximum marks in any subject: ");
+    scanf("%d",&max);
+    float marks[n], res[2];
+    for(int i = 0; i < n; i++)
+    {
+        printf("Enter marks[%d]: ", i);
+        scanf("%f",&marks[i]);
+    }
+
+    result(marks,n,max,res);
+    printf("\nAverage: %f", res[0]);
+    printf("\nPercentage: %f",res[1]);
+}
+
+
+/*
+CO7 - Activity Set 1 - Home Assignment 1
+
+Write a program in C to check Armstrong
+and Perfect numbers using the function.
+*/
+#include<math.h>
+int chkArmstrong(int n)
+{
+    int num1 = n, count = 0;
+    double sum = 0;
+    while(n)
+    {
+        count++;
+        n /= 10;
+    }
+    n = num1;
+    while(n)
+    {
+        int a = n % 10;
+        sum = sum + pow(a,count);
+        n /= 10;
+    }
+    return (sum == num1);
+}
+
+int chkPerfect(int n)
+{
+    int sum = 0;
+    for(int i = 1; i <= n / 2; i++)
+        if(n % i == 0)
+            sum += i;
+    return (sum == n);
+}
+int main()
+{
+    int num;
+    printf("Enter a number: ");
+    scanf("%d",&num);
+
+    if(chkArmstrong(num))
+        printf("\n%d is an Armstrong number.",num);
+    else
+        printf("\n%d is not an Armstrong number.",num);
+
+    if(chkPerfect(num))
+        printf("\n%d is a Perfect number.",num);
+    else
+        printf("\n%d is not a Perfect number.",num);
+}
+
+
+/*
+CO7 - Activity Set 1 - Home Assignment 2
+
+Write a program in C to print all perfect numbers in a
+given range using the function.
+*/
+
+#include<math.h>
+void chkArmstrong(int n, int m)
+{
+    for(int i = n; i <= m; i++)
+    {
+        int n = i, count = 0;
+        double sum = 0;
+        while(n)
+        {
+            count++;
+            n /= 10;
+        }
+        n = i;
+        while(n)
+        {
+            int a = n % 10;
+            sum = sum + pow(a,count);
+            n /= 10;
+        }
+        if(sum == i)
+            printf("%d, ",i);
+    }
+}
+
+void chkPerfect(int n, int m)
+{
+    for(int j = n; j <= m; j++)
+    {
+        int sum = 0;
+        for(int i = 1; i <= j / 2; i++)
+            if(j % i == 0)
+                sum += i;
+        if(sum == j)
+            printf("%d, ",j);
+    }
+}
+
+int main()
+{
+    int num1, num2;
+    printf("Enter the starting number: ");
+    scanf("%d",&num1);
+    printf("Enter the ending number: ");
+    scanf("%d",&num2);
+    printf("\nArmstrong strong numbers in %d to %d are ",num1,num2);
+    chkArmstrong(num1,num2);
+    printf("\nPerfect numbers in %d to %d are ",num1,num2);
+    chkPerfect(num1,num2);
+}
+
+
+/*
+CO7 - Activity Set 1 - Home Assignment 3
+
+Write a program in C to check whether two given strings
+are an anagram.
+
+Test Data :
+Input the first String : spare
+Input the second String : pears
+
+Expected Output :
+spare and pears are Anagram.
+
+*/
+
+#include<string.h>
+void swap(char *n, int i, int j)
+{
+    char temp = n[i];
+    n[i] = n[j];
+    n[j] = temp;
+}
+void sortString(char *n)
+{
+    for(int i = 0; i < strlen(n); i++)
+    {
+        int min = i;
+        for(int j = i + 1; j < strlen(n); j++)
+            if(n[min] > n[j])
+                min = j;
+        if(min != i)
+            swap(n, min, i);
+    }
+}
+int chkAnagram(char *n, char *m)
+{
+    sortString(n);
+    sortString(m);
+    int i,j;
+    for(i = 0,j = 0; i < strlen(n); i++, j++)
+        if(n[i] != m[j])
+            break;
+    return(i == strlen(n));
+}
+
+int main()
+{
+    char str1[25], str2[25];
+    printf("Enter first string: ");
+    gets(str1);
+    printf("Enter second string: ");
+    scanf(" ");
+    gets(str2);
+
+    char temp1[25], temp2[25];
+    strcpy(temp1,str1);
+    strcpy(temp2,str2);
+
+    if((strlen(str1) == strlen(str2)) && chkAnagram(str1,str2))
+        printf("'%s' and '%s' are Anagram.",temp1,temp2);
+    else
+        printf("'%s' and '%s' are not Anagram.",str1,str2);
+}
+
+
+
