@@ -1,0 +1,515 @@
+/*
+CO7 - Activity Set 2 - P1
+
+Write a C program to add two numbers using pass by value.
+
+Use the following function prototype:
+int input();
+int add(int a, int b);
+void output(int a, int b, int sum);
+*/
+
+int input()
+{
+    int a;
+    printf("Enter number: ");
+    scanf("%d",&a);
+    return a;
+}
+
+int add(int a, int b)
+{
+    return (a + b);
+}
+
+void output(int a, int b, int sum)
+{
+    printf("\n%d + %d = %d",a,b,sum);
+}
+
+int main()
+{
+    int a = input();
+    int b = input();
+    output(a,b,add(a,b));
+}
+
+
+/*
+CO7 - Activity Set 2 - P2
+
+Write a C program to compare three numbers using pass by value.
+
+Function Declarations
+
+int input();
+int compare(int a, int b, int c);
+void output(int a, int b, int c, int largest);
+
+*/
+
+int input()
+{
+    int a;
+    printf("Enter number: ");
+    scanf("%d",&a);
+    return a;
+}
+
+int compare(int a, int b, int c)
+{
+    int max = a > b ? a : b;
+    return (max > c ? max : c);
+}
+
+void output(int a, int b, int c, int largest)
+{
+    printf("\nLargest of %d, %d, and %d is %d",a,b,c,largest);
+}
+
+int main()
+{
+    int a = input();
+    int b = input();
+    int c = input();
+    output(a,b,c,compare(a,b,c));
+}
+
+/*
+CO7 - Activity Set 2 - P3
+
+Write a C program to find sum of all natural numbers until n.
+
+Function Declarations
+int input_n();
+int sum_n_nos(int n);
+void output(int n, int sum);
+
+*/
+
+int input_n()
+{
+    int a;
+    printf("Enter number: ");
+    scanf("%d",&a);
+    return a;
+}
+
+int sum_n_nos(int n)
+{
+    return (n * (n + 1) / 2);
+}
+
+void output(int n, int sum)
+{
+    printf("\nSum of %d natural numbers is %d",n,sum);
+}
+
+int main()
+{
+    int a = input_n();
+    output(a,sum_n_nos(a));
+}
+
+
+/*
+CO7 - Activity Set 2 - P4
+
+Write a C program to find the square root of a number.
+
+Function Declarations
+
+float input();
+float square_root(float n);
+void output(float n, float sqrroot);
+
+*/
+#include<math.h>
+float input_n()
+{
+    float a;
+    printf("Enter number: ");
+    scanf("%f",&a);
+    return a;
+}
+
+float square_root(float n)
+{
+    return sqrt(n);
+}
+
+void output(float n, float sqrroot)
+{
+    printf("\nsqrt(%f) = %f",n,sqrroot);
+}
+
+int main()
+{
+    float a = input_n();
+    output(a,square_root(a));
+}
+
+
+/*
+CO7 - Activity Set 2 - P5
+
+Write a C program to find the sum of n different numbers
+entered by the user.
+
+Function Declarations
+
+int input_array_size();
+void input_array(int n, int a[n]);
+int sum_n_array(int n, int a[n]);
+void output(int n, int a[n],int sum);
+*/
+
+int input_array_size()
+{
+    int a;
+    printf("Enter the number of elements: ");
+    scanf("%d",&a);
+    return a;
+}
+
+void input_array(int n, int a[n])
+{
+    for(int i = 0; i < n; i++)
+    {
+        printf("Enter a[%d]: ",i);
+        scanf("%d",&a[i]);
+    }
+}
+
+int sum_n_array(int n, int a[n])
+{
+    int sum = 0;
+    for(int i = 0; i < n; i++)
+        sum += a[i];
+    return sum;
+}
+
+void output(int n, int a[n],int sum)
+{
+    printf("\nSum of ");
+    for(int i = 0; i < n; i++)
+        printf("%d ", a[i]);
+    printf(" is %d.",sum);
+}
+
+int main()
+{
+    int a = input_array_size();
+    int arr[a];
+    input_array(a,arr);
+    output(a,arr,sum_n_array(a,arr));
+}
+
+
+/*
+CO7 - Activity Set 2 - P6 and P7
+
+Write a program to find the average of all the odd elements
+in an array
+
+Function Declarations
+int input_n();
+void input(int n, int a[n]);
+float odd_average(int n, int a[n]);
+void output(float avg);
+
+Input
+5
+5 4 3 8 0
+
+Output
+Average of all the odd elements is: 4
+*/
+
+int input_n()
+{
+    int a;
+    printf("Enter the number of elements: ");
+    scanf("%d",&a);
+    return a;
+}
+
+void input(int n, int a[n])
+{
+    for(int i = 0; i < n; i++)
+    {
+        printf("Enter a[%d]: ",i);
+        scanf("%d",&a[i]);
+    }
+}
+
+float odd_average(int n, int a[n])
+{
+    int sum = 0, count = 0;;
+    for(int i = 0; i < n; i++)
+        if(a[i] % 2)
+        {
+            sum += a[i];
+            count++;
+        }
+    return (float)sum/count;
+}
+
+void output(float avg)
+{
+    printf("\nAverage of all the odd elements is: %0.2f",avg);
+}
+
+int main()
+{
+    int a = input_n();
+    int arr[a];
+    input(a,arr);
+    output(odd_average(a,arr));
+}
+
+
+/*
+CO7 - Activity Set 2 - P8
+
+Write a program to find the nth number in fibonacci sequence.
+
+Fibonacci Sequence is of the form: 0, 1, 1, 2, 3, 5, 8, 13, ...
+
+Function Declarations
+int input();
+int find_fibo(int n);
+void output(int n, int fibo);
+
+Input:
+5
+Output:
+fibo(5) = 3
+*/
+
+int input()
+{
+    int a;
+    printf("Enter which term of Fibonacci sequence to be printed: ");
+    scanf("%d",&a);
+    return a;
+}
+
+int find_fibo(int n)
+{
+    if(n == 1)
+        return 0;
+    else if(n == 2)
+        return 1;
+    else
+    {
+        int a = 0, b = 1, temp;
+        n -= 2;
+        while(n)
+        {
+            temp = a + b;
+            a = b;
+            b = temp;
+            n--;
+        }
+        return temp;
+    }
+}
+
+void output(int n, int fibo)
+{
+    printf("\nfibo(%d) = %d",n,fibo);
+}
+
+int main()
+{
+    int a = input();
+    output(a,find_fibo(a));
+}
+
+
+/*
+CO7 - Activity Set 2 - P9
+
+Write a program to find the index of the largest number
+in an array.
+
+Function Declarations
+int input_size();
+void input_array(int n, int a[n]);
+int find_largest_index(int n, int a[n]);
+void output(int index);
+*/
+
+int input_size()
+{
+    int a;
+    printf("Enter the number of elements: ");
+    scanf("%d",&a);
+    return a;
+}
+
+void input_array(int n, int a[n])
+{
+    for(int i = 0; i < n; i++)
+    {
+        printf("Enter a[%d]: ",i);
+        scanf("%d",&a[i]);
+    }
+}
+
+int find_largest_index(int n, int a[n])
+{
+    int max = 0;
+    for(int i = 1; i < n; i++)
+        if(a[i] > a[max])
+            max = i;
+    return max;
+}
+
+void output(int index)
+{
+    printf("\nThe largest element is present at index %d",index);
+}
+
+int main()
+{
+    int a = input_size();
+    int arr[a];
+    input_array(a,arr);
+    output(find_largest_index(a,arr));
+}
+
+
+/*
+CO7 - Activity Set 2 - Home Activity 1
+
+Write a program to find if a triangle is scalene.
+A triangle is scalene if all the three sides of the
+triangle are not equal to one another.
+
+Function Declarations
+int input_side();
+int check_scalene(int a, int b, int c);
+void output(int a, int b, int c, int isscalene);
+
+*/
+
+int input_side()
+{
+    int a;
+    printf("Enter side: ");
+    scanf("%d",&a);
+    return a;
+}
+
+int check_scalene(int a, int b, int c)
+{
+    return a == b ? 0 : a == c ? 0 : b == c ? 0 : 1;
+}
+
+void output(int a, int b, int c, int isscalene)
+{
+    printf("\nTriangle with sides %d, %d, and %d is ", a,b,c);
+    if(isscalene)
+        printf("scalene.");
+    else
+        printf("not scalene.");
+}
+
+int main()
+{
+    int a = input_side();
+    int b = input_side();
+    int c = input_side();
+    output(a,b,c,check_scalene(a,b,c));
+}
+
+
+/*
+CO7 - Activity Set 2 - Home Activity 2
+
+Write a program find whether a number is a composite number
+A Composite number has more than 2 factors.
+
+Function Declarations
+int input_number();
+int is_composite(int n);
+void output(int n, int result);
+*/
+
+int input_number()
+{
+    int a;
+    printf("Enter a number: ");
+    scanf("%d",&a);
+    return a;
+}
+
+int is_composite(int n)
+{
+    int i;
+    for(i = 2; i <= n/2; i++)
+        if(n % i == 0)
+            break;
+    return (i <= n/2);
+}
+
+void output(int n, int result)
+{
+    if(result)
+        printf("\n%d is composite.",n);
+    else
+        printf("%d is not composite.");
+}
+
+int main()
+{
+    int a = input_number();
+    output(a,is_composite(a));
+}
+
+
+/*
+CO7 - Activity Set 2 - Home Activity 3
+
+Write a program to find GCD (HCF) of two numbers.
+
+Function Declarations
+int input();
+int find_gcd(int a, int b);
+void output(int a, int b, int gcd);
+*/
+
+int input()
+{
+    int a;
+    printf("Enter a number: ");
+    scanf("%d",&a);
+    return a;
+}
+
+int find_gcd(int a, int b)
+{
+    while(b)
+    {
+        int temp = a % b;
+        a = b;
+        b = temp;
+    }
+    return a;
+}
+
+void output(int a, int b, int gcd)
+{
+    printf("GCD of %d and %d is %d.",a,b,gcd);
+}
+
+int main()
+{
+    int a = input();
+    int b = input();
+    output(a,b,find_gcd(a,b));
+}
+
+
