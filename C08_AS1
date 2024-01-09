@@ -1,0 +1,344 @@
+/*
+CO8 - Activity Set 1 - P1
+
+Write a C program to create, initialize and use pointers.
+*/
+
+#include<stdio.h>
+
+int main()
+{
+    int i, *iPtr = &i;
+    float f, *fPtr = &f;
+    char c, *cPtr = &c;
+    printf("Enter integer: ");
+    scanf("%d",&i);
+    printf("Enter real number: ");
+    scanf("%f",&f);
+    printf("Enter char: ");
+    scanf(" %c",&c);
+    printf("\nUsing variable...\nInt value: %d, address: %d",i,&i);
+    printf("\nUsing pointer...\nInt value: %d, address: %d",*iPtr,iPtr);
+    printf("\nsize of pointer in bytes: %d\n",sizeof(iPtr));
+    printf("\nUsing variable...\nFloat value: %f, address: %d",f,&f);
+    printf("\nUsing pointer...\nFloat value: %f, address: %d",*fPtr,fPtr);
+    printf("\nsize of pointer in bytes: %d\n",sizeof(fPtr));
+    printf("\nUsing variable...\nCharacter value: %c, address: %d",c,&c);
+    printf("\nUsing pointer...\nCharacter value: %c, address: %d",*cPtr,cPtr);
+    printf("\nsize of pointer in bytes: %d\n",sizeof(cPtr));
+    return 0;
+}
+
+
+/*
+CO8 - Activity Set 1 - P2
+
+Write a C program to input and print array elements
+using a pointer.
+*/
+
+#include<stdio.h>
+
+int main()
+{
+    int n;
+    printf("Enter number of elements in an array: ");
+    scanf("%d",&n);
+    int a[n];
+    printf("\nEnter array elements...\n");
+    for(int i = 0; i < n; i++)
+    {
+        printf("Enter a[%d]: ",i);
+        scanf("%d",(a+i));
+    }
+    printf("\nArray elements are ");
+    for(int i = 0; i < n; i++)
+        printf("%d ",*(a+i));
+}
+
+
+/*
+CO8 - Activity Set 1 - P3
+
+Write a C program to access a two dimensional array
+using pointers.
+*/
+
+#include<stdio.h>
+
+int main()
+{
+    int n,m;
+    printf("Enter number of rows in a two dimensional array: ");
+    scanf("%d",&n);
+    printf("Enter number of columns in a two dimensional array: ");
+    scanf("%d",&m);
+    int a[n][m];
+    printf("\nEnter array elements...\n");
+    for(int i = 0; i < n; i++)
+        for(int j = 0; j < m; j++)
+        {
+            printf("Enter a[%d]: ",i);
+            scanf("%d",*(a+i) + j);
+        }
+    printf("\nArray elements are...\n");
+    for(int i = 0; i < n; i++)
+    {
+        for(int j = 0; j < m; j++)
+            printf("%d ",*(*(a+i) + j));
+        printf("\n");
+    }
+}
+
+
+/*
+CO8 - Activity Set 1 - P4
+
+Write a C program to search an element in an array
+using pointers.
+*/
+
+#include<stdio.h>
+
+int main()
+{
+    int i, n, num;
+    printf("Enter number of elements in an array: ");
+    scanf("%d",&n);
+    int a[n];
+    printf("\nEnter array elements...\n");
+    for(i = 0; i < n; i++)
+    {
+        printf("Enter a[%d]: ",i);
+        scanf("%d",(a+i));
+    }
+
+    printf("\nArray elements are ");
+    for(i = 0; i < n; i++)
+        printf("%d ",*(a+i));
+
+    printf("\nEnter the element to be searched: ");
+    scanf("%d",&num);
+    for(i = 0; i < n; i++)
+        if(*(a+i) == num)
+        {
+            printf("%d is present at index %d",num,i);
+            break;
+        }
+    if(i == n)
+        printf("%d is not present.",num);
+}
+
+
+/*
+CO8 - Activity Set 1 - P5
+
+Write a C program to sort array using pointers.
+*/
+
+#include<stdio.h>
+
+int main()
+{
+    int i, n, min;
+    printf("Enter number of elements in an array: ");
+    scanf("%d",&n);
+    int a[n];
+    printf("\nEnter array elements...\n");
+    for(i = 0; i < n; i++)
+    {
+        printf("Enter a[%d]: ",i);
+        scanf("%d",(a+i));
+    }
+
+    printf("\nArray elements are ");
+    for(i = 0; i < n; i++)
+        printf("%d ",*(a+i));
+
+    for(i = 0; i < n - 1; i++)
+    {
+        min = i;
+        for(int j = i + 1; j < n; j++)
+            if(*(a + min) > *(a + j))
+                min = j;
+        if(min != i)
+        {
+            int temp = *(a + i);
+            *(a + i) = *(a + min);
+            *(a + min) = temp;
+        }
+    }
+
+    printf("\nArray elements after sorting are ");
+    for(i = 0; i < n; i++)
+        printf("%d ",*(a+i));
+}
+
+
+/*
+CO8 - Activity Set 1 - P6
+
+Write a C program to return multiple values from
+function using pointers.
+*/
+struct minmax
+{
+    int min,max;
+};
+
+struct minmax getMinimumMaximum(int *a, int n)
+{
+    struct minmax m;
+    m.min = m.max = 0;
+    for(int i = 1; i < n; i++)
+    {
+        if(*(a + m.min) > *(a + i))
+            m.min = i;
+        if(*(a + m.max) < *(a + i))
+            m.max = i;
+    }
+    return m;
+}
+
+int* getMinMax(int *a, int n)
+{
+    static int minMax[] = {0,0};
+    for(int i = 1; i < n; i++)
+    {
+        if(*(a + *(minMax + 0)) > *(a + i))
+            *(minMax + 0) = i;
+        if(*(a + *(minMax + 1)) < *(a + i))
+            *(minMax + 1) = i;
+    }
+    return minMax;
+}
+
+int main()
+{
+    int i, n, min;
+    printf("Enter number of elements in an array: ");
+    scanf("%d",&n);
+    int a[n];
+    printf("\nEnter array elements...\n");
+    for(i = 0; i < n; i++)
+    {
+        printf("Enter a[%d]: ",i);
+        scanf("%d",(a+i));
+    }
+
+    printf("\nArray elements are ");
+    for(i = 0; i < n; i++)
+        printf("%d ",*(a+i));
+
+    printf("\nMinimum maximum (returning via pointer)... ");
+    int *arr = getMinMax(a,n);
+    printf("\nMinimum: a[%d] = %d\nMaximum: a[%d] = %d\n",
+           *(arr + 0),*(a + *(arr + 0)),*(arr + 1),*(a + *(arr + 1)));
+
+    printf("\nMinimum maximum (returning via structure)... ");
+    struct minmax m = getMinimumMaximum(a,n);
+    printf("\nMinimum: a[%d] = %d\nMaximum: a[%d] = %d",
+           m.min,*(a + m.min),m.max,*(a + m.max));
+}
+
+
+/*
+CO8 - Activity Set 1 - Home Activity 1
+
+Write a C program to multiply two matrix using pointers.
+*/
+
+#include<stdio.h>
+
+int main()
+{
+    int n1, m1, n2, m2;
+    printf("Enter rows and columns for Matrix 1: ");
+    scanf("%d %d",&n1, &m1);
+    printf("Enter rows and columns for Matrix 2: ");
+    scanf("%d %d",&n2, &m2);
+    if(m1 != n2)
+        printf("Multiplication is not possible.");
+    else
+    {
+        int a[n1][m1], b[n2][m2], c[n1][m2];
+        printf("\nEnter elements of Matrix 1...\n");
+        for(int i = 0; i < n1; i++)
+            for(int j = 0; j < m1; j++)
+            {
+                printf("Enter a[%d]: ",i);
+                scanf("%d",*(a + i) + j);
+            }
+        printf("\nEnter elements of Matrix 2...\n");
+        for(int i = 0; i < n2; i++)
+            for(int j = 0; j < m2; j++)
+            {
+                printf("Enter b[%d]: ",i);
+                scanf("%d",*(b + i) + j);
+            }
+
+        printf("\nMatrix 1...\n");
+        for(int i = 0; i < n1; i++)
+        {
+            for(int j = 0; j < m1; j++)
+                printf("%d ",*(*(a + i) + j));
+            printf("\n");
+        }
+
+        printf("\nMatrix 2...\n");
+        for(int i = 0; i < n2; i++)
+        {
+            for(int j = 0; j < m2; j++)
+                printf("%d ",*(*(b + i) + j));
+            printf("\n");
+        }
+
+        printf("\nMatrix 1 x Matrix 2...\n");
+        for(int i = 0; i < n1; i++)
+        {
+            for(int j = 0; j < m2; j++)
+            {
+                *(*(c + i) + j) = 0;
+                for(int k = 0; k < m1; k++)
+                    *(*(c + i) + j) += *(*(a + i) + k) * *(*(b + k) + j);
+                printf("%d ",*(*(c + i) + j));
+            }
+            printf("\n");
+        }
+    }
+}
+
+
+/*
+CO8 - Activity Set 1 - Home Activity 2
+
+Write a C program to find the reverse of a string using pointers.
+*/
+
+#include<stdio.h>
+
+int main()
+{
+    char str[25], strRev[25], *s = str, *sRev = strRev;
+    printf("Enter a string: ");
+    scanf("%[^\n]",str);
+
+    int i = 0;
+    while(*s)
+    {
+        i++;
+        s++;
+    }
+    s--;
+
+    while(i)
+    {
+        *sRev = *s;
+        s--;
+        sRev++;
+        i--;
+    }
+    printf("\n%s\n%s",str,strRev);
+}
+
+
