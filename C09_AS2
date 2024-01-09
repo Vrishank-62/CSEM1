@@ -1,0 +1,362 @@
+/*
+CO9 - Activity Set 2 - P1
+
+Create a structure called Books with data given below:
+● Name of the book
+● Price
+● Year of Publishing
+● Quantity
+
+Assume that there are ‘n’ books. Take the value of ‘n’
+as an input from the user.
+● Pass the structure by reference and use a display function
+to display the details of books whose price is greater than 200.
+● Display the details of books whose Year of Publishing
+is greater than 2015.
+● Display the total amount spent in purchasing a single
+book title(Price of the book * Quantity)
+*/
+
+struct book
+{
+    char title[30];
+    float price;
+    int yearOfPublish, quantity;
+};
+
+void getInput(struct book *b)
+{
+    printf("Title: ");
+    scanf(" %[^\n]%*c",&b->title);
+    printf("Year of Publishing: ");
+    scanf("%d",&b->yearOfPublish);
+    printf("Price: ");
+    scanf("%f",&b->price);
+    printf("Quantity: ");
+    scanf("%d",&b->quantity);
+}
+
+void displayByPrice(struct book *b, int n, float p)
+{
+    printf("\n\nBook titles with price greater than %0.2f are...\n",p);
+    for(int i = 0; i < n; i++)
+    {
+        if(b[i].price > p)
+        {
+            printf("\nTitle: %s", b[i].title);
+            printf("\nPrice: %0.2f", b[i].price);
+            printf("\nYear of publication: %d", b[i].yearOfPublish);
+            printf("\nCopies in stock: %d", b[i].quantity);
+        }
+    }
+}
+
+void displayByYearOfPublish(struct book *b, int n, int y)
+{
+    printf("\n\nBook titles published in %d are...\n",y);
+    for(int i = 0; i < n; i++)
+    {
+        if(b[i].yearOfPublish == y)
+        {
+            printf("\nTitle: %s", b[i].title);
+            printf("\nPrice: %0.2f", b[i].price);
+            printf("\nYear of publication: %d", b[i].yearOfPublish);
+            printf("\nCopies in stock: %d", b[i].quantity);
+        }
+    }
+}
+
+void purchaseAmount(struct book *b, int n)
+{
+    printf("\nBook titles with purchase amounts are...\n");
+    for(int i = 0; i < n; i++)
+    {
+        printf("\n\nTitle: %s", b[i].title);
+        printf("\nPurchase amount: %0.2f", b[i].price * b[i].quantity);
+    }
+}
+
+int main()
+{
+    int n;
+    printf("Enter the number of titles: ");
+    scanf("%d",&n);
+    struct book b[n];
+    for(int i = 0; i < n; i++)
+    {
+        printf("\nEnter details of book %d\n",i + 1);
+        getInput(&b[i]);
+    }
+    displayByPrice(b,n,200);
+    displayByYearOfPublish(b,n,2015);
+    purchaseAmount(b,n);
+}
+
+
+/*
+CO9 - Activity Set 2 - P2
+
+Write a structure to store the roll no., name, age and
+address of n students.
+
+Store the information of the students.
+1 - Write a function to print the names of all the
+students having age 14.
+2 - Write another function to print the names of all
+the students having even roll no.
+3 - Write another function to display the details of
+the student whose roll no is given (i.e. roll no.
+entered by the user).
+*/
+
+struct student
+{
+    char name[30], address[50];
+    int age, rollNumber;
+};
+
+void getInput(struct student *s)
+{
+    printf("Roll number: ");
+    scanf("%d",&s->rollNumber);
+    printf("Name: ");
+    scanf(" %[^\n]%*c",&s->name);
+    printf("Age: ");
+    scanf("%d",&s->age);
+    printf("Address: ");
+    scanf(" %[^\n]%*c",&s->address);
+}
+
+void displayByAge(struct student *s, int n, int a)
+{
+    printf("\n\nFollowing are the details of the students with age %d...\n",a);
+    for(int i = 0; i < n; i++)
+    {
+        if(s[i].age == a)
+        {
+            printf("\nRoll Number: %d", s[i].rollNumber);
+            printf("\nName: %s", s[i].name);
+            printf("\nAge: %d", s[i].age);
+            printf("\nAddress: %s\n", s[i].address);
+        }
+    }
+}
+
+void displayByEvenRollNumber(struct student *s, int n)
+{
+    printf("\n\nFollowing are the details of the students with even roll numbers...\n");
+    for(int i = 0; i < n; i++)
+    {
+        if(s[i].rollNumber % 2 == 0)
+        {
+            printf("\nRoll Number: %d", s[i].rollNumber);
+            printf("\nName: %s", s[i].name);
+            printf("\nAge: %d", s[i].age);
+            printf("\nAddress: %s\n", s[i].address);
+        }
+    }
+}
+
+void displayByRollNumber(struct student *s, int n, int r)
+{
+    printf("\n\nFollowing are the details of the student with roll number %d...\n",r);
+    for(int i = 0; i < n; i++)
+    {
+        if(s[i].rollNumber == r)
+        {
+            printf("\nRoll Number: %d", s[i].rollNumber);
+            printf("\nName: %s", s[i].name);
+            printf("\nAge: %d", s[i].age);
+            printf("\nAddress: %s", s[i].address);
+        }
+    }
+}
+
+int main()
+{
+    int n,r;
+    printf("Enter the number of students: ");
+    scanf("%d",&n);
+    struct student s[n];
+    for(int i = 0; i < n; i++)
+    {
+        printf("\nEnter details of student %d\n",i + 1);
+        getInput(&s[i]);
+    }
+    displayByAge(s,n,14);
+    displayByEvenRollNumber(s,n);
+    printf("\nEnter the roll number whose details are to be displayed: ");
+    scanf("%d",&r);
+    displayByRollNumber(s,n,r);
+}
+
+
+/*
+CO9 - Activity Set 2 - P3
+
+Write a structure to store the names, salary and hours
+of work per day of 10 employees in a company.
+Write a program to increase the salary depending on the
+number of hours of work per day as follows and then print
+the name of all the employees along with their final salaries.
+
+Hours of work per day	 8     	    10          >=12
+Increase in salary	    Rs.50	    Rs.100      Rs.150
+*/
+
+struct employees
+{
+    char name[30];
+    float salary, workHrsPerDay;
+};
+
+void getInput(struct employees *e)
+{
+    printf("Name: ");
+    scanf(" %[^\n]%*c",&e->name);
+    printf("Salary: ");
+    scanf("%f",&e->salary);
+    printf("Hours of work per day: ");
+    scanf("%f",&e->workHrsPerDay);
+}
+
+void increaseSalary(struct employees *e, int n)
+{
+    for(int i = 0; i < n; i++)
+        if(e[i].workHrsPerDay >= 12)
+            e[i].salary += 150;
+        else if(e[i].workHrsPerDay >= 10)
+            e[i].salary += 100;
+        else if(e[i].workHrsPerDay >= 8)
+            e[i].salary += 50;
+}
+
+void display(struct employees *e, int n)
+{
+    printf("\n\nFollowing are the details of the employees...\n");
+    for(int i = 0; i < n; i++)
+    {
+        printf("\nName: %s", e[i].name);
+        printf("\nSalary: %f", e[i].salary);
+    }
+}
+
+int main()
+{
+    int n;
+    printf("Enter the number of employees: ");
+    scanf("%d",&n);
+    struct employees e[n];
+    for(int i = 0; i < n; i++)
+    {
+        printf("\nEnter details of employee %d\n",i + 1);
+        getInput(&e[i]);
+    }
+    increaseSalary(e,n);
+    display(e,n);
+}
+
+
+/*
+CO9 - Activity Set 2 - P4
+
+Write a program to find the area of a triangle.
+
+typedef struct _triangle
+{
+    int base, altitude, area;
+} Triangle;
+
+** Function Declarations**
+Triangle input_triangle();
+void find_area(Triangle *t);
+void output(Triangle t);
+
+Note: Area = 1/2(Base * Altitude)
+*/
+
+typedef struct _triangle
+{
+    float base, altitude, area;
+}Triangle;
+
+Triangle input_triangle()
+{
+    Triangle t;
+    printf("Enter base: ");
+    scanf("%f",&t.base);
+    printf("Enter altitude: ");
+    scanf("%f",&t.altitude);
+    find_area(&t);
+    return t;
+}
+
+void find_area(Triangle *t)
+{
+    t->area = 0.5 * t->base * t->altitude;
+}
+
+void output(Triangle t)
+{
+    printf("Area of triangle with base %f and altitude %f is %f",
+           t.base, t.altitude, t.area);
+}
+
+int main()
+{
+    Triangle t = input_triangle();
+    output(t);
+}
+
+
+/*
+CO9 - Activity Set 2 - P5
+
+You want to store two parts of a computer along with
+its price. Do this for n computers.
+
+Call the structure 'MyComputer'. Pass 'MyComputer' to a
+function called 'displayMe' and print the values you entered.
+*/
+
+struct MyComputer
+{
+    float price[2];
+};
+
+struct MyComputer input()
+{
+    struct MyComputer m;
+    printf("Enter cost of first part: ");
+    scanf("%f",&m.price[0]);
+    printf("Enter cost of second part: ");
+    scanf("%f",&m.price[1]);
+    return m;
+}
+
+void display(struct MyComputer m)
+{
+    printf("\nCost of first part: %f",m.price[0]);
+    printf("\nCost of second part: %f",m.price[1]);
+    printf("\nTotal cost: %f\n",m.price[0] + m.price[1]);
+}
+
+int main()
+{
+    int n;
+    printf("Enter the number of computers: ");
+    scanf("%d", &n);
+    struct MyComputer m[n];
+    for(int i = 0; i < n; i++)
+    {
+        printf("\nEnter details of computer %d...\n",i + 1);
+        m[i] = input();
+    }
+    for(int i = 0; i < n; i++)
+    {
+        printf("\nDetails of computer %d...\n",i + 1);
+        display(m[i]);
+    }
+}
+
+
