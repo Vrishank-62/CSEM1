@@ -1,0 +1,462 @@
+/*
+CO9 - Activity Set 1 - P1
+
+Write a program to store and print the name, USN, section
+and semester for three students using structures.
+Print the details of the student with Section entered by
+the user.
+*/
+#include<stdio.h>
+struct student
+{
+    int semester;
+    char section, name[25], usn[12];
+};
+int main()
+{
+    struct student s[3];
+    for(int i = 0; i < 3; i++)
+    {
+        printf("Enter USN: ");
+        scanf("%s",&s[i].usn);
+        printf("Enter Name: ");
+        scanf(" %[^\n]%*c",&s[i].name);
+        //gets(s.name);
+        printf("Enter Section: ");
+        scanf(" %c",&s[i].section);
+        printf("Enter Semester: ");
+        scanf("%d",&s[i].semester);
+    }
+
+    char sec;
+    printf("Enter the Section to be searched: ");
+    scanf(" %c",&sec);
+    for(int i = 0; i < 3; i++)
+    {
+        if(sec == s[i].section)
+        {
+            printf("\nUSN: %s",s[i].usn);
+            printf("\nName: %s",s[i].name);
+            printf("\nSection: %c",s[i].section);
+            printf("\nSemester: %d",s[i].semester);
+        }
+    }
+}
+
+
+/*
+CO9 - Activity Set 1 - P2
+
+Write a program to store and print the name, USN, section
+and semester for three students using structures.
+Print the details of the student with roll no. entered
+by the user.
+*/
+
+#include<stdio.h>
+struct student
+{
+    int semester;
+    char section, name[25], usn[12];
+};
+int main()
+{
+    struct student s[3];
+    for(int i = 0; i < 3; i++)
+    {
+        printf("Enter USN: ");
+        scanf("%s",&s[i].usn);
+        printf("Enter Name: ");
+        scanf(" %[^\n]%*c",&s[i].name);
+        //gets(s.name);
+        printf("Enter Section: ");
+        scanf(" %c",&s[i].section);
+        printf("Enter Semester: ");
+        scanf("%d",&s[i].semester);
+    }
+
+    char rn[25];
+    printf("\nEnter the USN to be searched: ");
+    scanf("%s",&rn);
+    for(int i = 0; i < 3; i++)
+    {
+        if(strcmp(rn,s[i].usn) == 0)
+        {
+            printf("\nUSN: %s",s[i].usn);
+            printf("\nName: %s",s[i].name);
+            printf("\nSection: %c",s[i].section);
+            printf("\nSemester: %d",s[i].semester);
+        }
+    }
+}
+
+
+/*
+CO9 - Activity Set 1 - P3
+
+Enter the marks of 5 students in Chemistry, Mathematics
+and Physics (each out of 100) using a structure named
+Marks having elements roll no., name, chem_marks,
+maths_marks and phy_marks and then display the percentage
+of each student.
+*/
+
+struct Marks
+{
+    int rollNo;
+    float chem_marks, maths_marks, phy_marks;
+    char name[25];
+};
+
+float getPercentage(struct Marks m)
+{
+    return (m.chem_marks + m.maths_marks + m.phy_marks)/3;
+}
+
+int main()
+{
+    struct Marks stu[5];
+    for(int i = 0; i < 5; i++)
+    {
+        printf("Enter details of Student %d...\n",1 + i);
+        printf("Roll Number: ");
+        scanf("%d",&stu[i].rollNo);
+        printf("Name: ");
+        scanf(" %[^\n]%*c",&stu[i].name);
+        printf("Marks in Chemistry: ");
+        scanf("%f",&stu[i].chem_marks);
+        printf("Marks in Mathematics: ");
+        scanf("%f",&stu[i].maths_marks);
+        printf("Marks in Physics: ");
+        scanf("%f",&stu[i].phy_marks);
+    }
+    printf("******Result******\n");
+    for(int i = 0; i < 5; i++)
+    {
+        printf("Roll Number: %d\n", stu[i].rollNo);
+        printf("Name: %s\n", stu[i].name);
+        printf("Percentage: %0.2f%%\n", getPercentage(stu[i]));
+    }
+}
+
+
+/*
+CO9 - Activity Set 1 - P4
+
+Create a structure called Customer to store the following
+information:
+● Name
+● Account number
+● Account Balance
+
+a) Write a function to check whether the customer has
+a balance less than Rs. 200.
+
+b) Write a function to add Rs. 100 in the balance of
+the customer if the customer has more than Rs. 1000 in
+their balance and then print the incremented value of their
+balance.
+*/
+
+struct Customer
+{
+    char name[25], actNo[15];
+    float balance;
+};
+int checkBalance(struct Customer *c)
+{
+    return (*c).balance < 200 ? 0 :
+        (*c).balance > 1000 ? (*c).balance += 100 : -1;
+}
+int main()
+{
+    struct Customer cust;
+    printf("Enter customer name: ");
+    gets(cust.name);
+    printf("Enter account number: ");
+    scanf(" ");
+    gets(cust.actNo);
+    printf("Enter balance: ");
+    scanf("%f",&cust.balance);
+
+    printf("\nEntered details are...\n\n");
+    printf("Customer name: %s", cust.name);
+    printf("\nAccount number: %s", cust.actNo);
+    printf("\nBalance: %.2f", cust.balance);
+
+    if(checkBalance(&cust) == 0)
+        printf("\nBalance is less than 200.");
+    else if(checkBalance(&cust) != -1)
+        printf("\nUpdated balance: %.2f",cust.balance);
+    else
+        printf("\nNo change. Balance is %.2f",cust.balance);
+
+    printf("\n");
+}
+
+
+/*
+CO9 - Activity Set 1 - P5
+
+WAP that takes the following as input from a user:
+● Model of a car. E.g Renault Duster.
+● Price of the car
+● Number on the number plate of your car. E.g. KA04HM1234.
+
+Take the data for five cars.
+
+Do the following:
+a) Display a count of how many cars have "KA" registration
+(Karnataka). Make sure you enter other state registrations
+also, such as TN, KL etc.
+b) Display the details of all cars with "KA" registration
+c) Display the count of all cars which cost more than Rs.10 Lakh
+d) Display the details of such cars under the heading “Luxury Cars”
+*/
+#include<string.h>
+struct cars
+{
+    char model[25], carNumber[12];
+    float price;
+};
+
+int getCarCount (struct cars *c, char *s)
+{
+    int count = 0;
+    for(int i = 0; i < 5; i++)
+    {
+        char temp[4] = {c[i].carNumber[0], c[i].carNumber[1]};
+        if(strcmp(s,temp) == 0)
+            count++;
+    }
+    return count;
+}
+
+void getCarDetails (struct cars *c, char *s)
+{
+    for(int i = 0; i < 5; i++)
+    {
+        char temp[4] = {c[i].carNumber[0], c[i].carNumber[1]};
+        if(strcmp(s,temp) == 0)
+            printf("\nCar with registration number %s is %s costs %0.2f lakhs.",
+                   c[i].carNumber, c[i].model, c[i].price);
+    }
+}
+
+int getLuxuryCarCount (struct cars *c, char *s)
+{
+    int count = 0;
+    for(int i = 0; i < 5; i++)
+        if(c[i].price > 10)
+            count++;
+    return count;
+}
+
+void getLuxuryCarDetails (struct cars *c, char *s)
+{
+    for(int i = 0; i < 5; i++)
+    {
+        if(c[i].price > 10)
+            printf("\nCar with registration number %s is %s costs %0.2f lakhs.",
+                   c[i].carNumber, c[i].model, c[i].price);
+    }
+}
+
+int main()
+{
+    struct cars c[5];
+    for(int i = 0; i < 5; i++)
+    {
+        printf("\nEnter car %d details...\n", i + 1);
+        printf("Car Number: ");
+        scanf("%s",&c[i].carNumber);
+        printf("Car Model: ");
+        scanf(" %[^\n]%*c",&c[i].model);
+        printf("Car Price: ");
+        scanf("%f",&c[i].price);
+    }
+    char s[] = "KA";
+    printf("\n\nNumber of cars having Karnataka registration: %d",getCarCount(c,s));
+    printf("\nThe details are as follows...");
+    getCarDetails(c,s);
+    printf("\n\nNumber of LUXURY Cars: %d",getLuxuryCarCount(c,s));
+    printf("\nLuxury car details are as follows...");
+    getLuxuryCarDetails(c,s);
+}
+
+
+/*
+CO9 - Activity Set 1 - P6
+
+C program to add two distances in feet and inches
+using structure.
+
+This program will read two distances in feet and inches
+and add them. The final result will be printed in the form
+of feet and inches using structure in C.
+*/
+
+struct distance
+{
+    int feet, inches;
+};
+
+void getInput(struct distance* d)
+{
+    printf("Enter distance\nfeet: ");
+    scanf("%d",&d->feet);
+    printf("inches: ");
+    scanf("%d",&d->inches);
+}
+
+struct distance addDistances(struct distance d1, struct distance d2)
+{
+    struct distance d3;
+    d3.inches = d1.inches + d2.inches;
+    d3.feet = d1.feet + d2.feet;
+    while(d3.inches >= 12)
+    {
+        d3.feet++;
+        d3.inches -= 12;
+    }
+    return d3;
+}
+
+int main()
+{
+    struct distance d1, d2, d3;
+    getInput(&d1);
+    getInput(&d2);
+    d3 = addDistances(d1, d2);
+    printf("%d\'%d\" + %d\'%d\" = %d\'%d\"",
+           d1.feet, d1.inches, d2.feet, d2.inches, d3.feet, d3.inches);
+}
+
+
+/*
+CO9 - Activity Set 1 - P7
+
+Write a program to compare two dates entered by the user.
+Make a structure named Date to store the elements day,
+month and year to store the dates.
+If the dates are equal, display "Dates are equal"
+otherwise display "Dates are not equal".
+*/
+
+struct date
+{
+    int day, month, year;
+};
+
+void getInput(struct date* d)
+{
+    printf("Day: ");
+    scanf("%d",&d->day);
+    printf("Month: ");
+    scanf("%d",&d->month);
+    printf("Year: ");
+    scanf("%d",&d->year);
+}
+
+int main()
+{
+    struct date d1, d2;
+    printf("Enter first date\n");
+    getInput(&d1);
+    printf("Enter second date\n");
+    getInput(&d2);
+    if(d1.day == d2.day && d1.month == d2.month && d1.year == d2.year)
+        printf("Dates are equal");
+    else
+        printf("Dates are not equal");
+}
+
+
+/*
+CO9 - Activity Set 1 - Home Assignment 1
+
+C Program to Add Two Complex Numbers by Passing
+Structure to a Function.
+*/
+
+struct complexNum
+{
+    float real, imaginary;
+};
+
+void getInput(struct complexNum* c)
+{
+    printf("Real part: ");
+    scanf("%f",&c->real);
+    printf("Imaginary part: ");
+    scanf("%f",&c->imaginary);
+}
+
+struct complexNum add(struct complexNum c1, struct complexNum c2)
+{
+    struct complexNum c3;
+    c3.real = c1.real + c2.real;
+    c3.imaginary = c1.imaginary + c2.imaginary;
+    return c3;
+}
+
+int main()
+{
+    struct complexNum  c1, c2, c3;
+    printf("Enter first complex number\n");
+    getInput(&c1);
+    printf("Enter second complex number\n");
+    getInput(&c2);
+    c3 = add(c1,c2);
+    printf("(%.2f + i%.2f) + (%.2f + i%.2f) = (%.2f + i%.2f)",
+           c1.real, c1.imaginary, c2.real, c2.imaginary,
+           c3.real, c3.imaginary);
+}
+
+
+
+/*
+CO9 - Activity Set 1 - Home Assignment 2
+
+C Program to Calculate Difference Between Two Time Periods
+given in hours, minutes and seconds.
+*/
+
+struct time
+{
+    int hours, minutes, seconds;
+};
+
+void getInput(struct time *t)
+{
+    printf("Hours: ");
+    scanf("%d",&t->hours);
+    printf("Minutes: ");
+    scanf("%d",&t->minutes);
+    printf("Seconds: ");
+    scanf("%d",&t->seconds);
+}
+
+int main()
+{
+    struct time t1, t2;
+    printf("Enter first hours minutes seconds\n");
+    getInput(&t1);
+    printf("Enter second hours minutes seconds\n");
+    getInput(&t2);
+    if(t2.seconds < t1.seconds)
+    {
+        t2.seconds += 60;
+        t2.minutes--;
+    }
+    if(t2.minutes < t1.minutes)
+    {
+        t2.minutes += 60;
+        t2.hours--;
+    }
+    printf("\nDifference is (hrs:min:sec) %d:%d:%d",t2.hours - t1.hours,
+           t2.minutes - t1.minutes, t2.seconds - t1.seconds);
+}
+
+
+
