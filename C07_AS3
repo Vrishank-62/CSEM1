@@ -1,0 +1,244 @@
+/*
+CO7 - Activity Set 3 - P1
+
+Write a C program to add two numbers using pass by reference.
+
+Function Declarations:
+int input();
+void add(int a, int b, int *sum);
+void output(int a, int b, int sum);
+*/
+
+int input()
+{
+    int a;
+    printf("Enter a number: ");
+    scanf("%d",&a);
+    return a;
+}
+
+void add(int a, int b, int *sum)
+{
+    *sum = a + b;
+}
+
+void output(int a, int b, int sum)
+{
+    printf("%d + %d = %d",a,b,sum);
+}
+
+int main()
+{
+    int a = input();
+    int b = input();
+    int sum;
+    add(a,b,&sum);
+    output(a,b,sum);
+}
+
+
+/*
+CO7 - Activity Set 3 - P2
+
+Write a C program to compare three numbers using
+pass by reference.
+
+Function Declarations:
+
+int input();
+void compare(int a, int b, int c, int *largest);
+void output(int a, int b, int c, int largest);
+*/
+
+int input()
+{
+    int a;
+    printf("Enter a number: ");
+    scanf("%d",&a);
+    return a;
+}
+
+void compare(int a, int b, int c, int *largest)
+{
+    *largest = a > b ? a : b;
+    *largest = *largest > c ? *largest : c;
+}
+
+void output(int a, int b, int c, int largest)
+{
+    printf("Largest among %d, %d, and %d is %d.",a,b,c,largest);
+}
+
+int main()
+{
+    int a = input();
+    int b = input();
+    int c = input();
+    int largest;
+    compare(a,b,c,&largest);
+    output(a,b,c,largest);
+}
+
+
+/*
+CO7 - Activity Set 3 - P3
+
+Write a program to find the weight of a camel,
+given height, length and stomach radius using four functions.
+
+weight = pi * stomach_radius^3 * sqrt(height * length)
+
+Function Declarations
+void input_camel_details(float *radius, float *height, float *length);
+float find_weight(float radius, float height, float length);
+void output(float radius, float height, float length, float weight);
+
+Input
+1
+1
+1
+
+Output
+The weight of the camel with radius: 1.0, height: 1.0,
+length: 1.0 is 3.1415
+
+*/
+#define pi 22.0/7
+#include<math.h>
+
+void input_camel_details(float *radius, float *height, float *length)
+{
+    printf("Enter the details...\nRadius: ");
+    scanf("%f",radius);
+    printf("Height: ");
+    scanf("%f",height);
+    printf("Length: ");
+    scanf("%f",length);
+}
+
+float find_weight(float radius, float height, float length)
+{
+    return (pi * radius * radius * radius * sqrt(height * length));
+}
+
+void output(float radius, float height, float length, float weight)
+{
+    printf("The weight of the camel with radius: ");
+    printf("%f, height: %f, length: %f is %f",radius,height,
+           length,weight);
+}
+
+int main()
+{
+    float radius, height, length;
+    input_camel_details(&radius, &height, &length);
+    output(radius, height, length, find_weight(radius,height,length));
+}
+
+
+/*
+CO7 - Activity Set 3 - P4
+
+Write a program to find the distance between 2 points.
+
+Function Declarations
+void input(float *x1, float *y1, float *x2, float *y2);
+float find_distance(float x1, float y1, float x2, float y2);
+void output(float x1, float y1, float x2, float y2, float distance);
+
+Input
+1 1
+2 2
+
+Output
+The distance between point (1.0000000, 1.0000000) and
+(2.0000000, 2.0000000) is 1.4142
+*/
+#include<math.h>
+
+void input(float *x1, float *y1, float *x2, float *y2)
+{
+    printf("Enter coordinates of point 1...\nx1: ");
+    scanf("%f",x1);
+    printf("y1: ");
+    scanf("%f",y1);
+    printf("Enter coordinates of point 2...\nx2: ");
+    scanf("%f",x2);
+    printf("y2: ");
+    scanf("%f",y2);
+}
+
+float find_distance(float x1, float y1, float x2, float y2)
+{
+    return (sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1)));
+}
+
+void output(float x1, float y1, float x2, float y2, float distance)
+{
+    printf("The distance between point (%0.4f, %0.4f) and ",x1,y1);
+    printf("(%0.4f, %0.4f) is %0.4f",x2,y2,distance);
+}
+
+int main()
+{
+    float x1, y1, x2, y2;
+    input(&x1, &y1, &x2, &y2);
+    output(x1, y1, x2, y2, find_distance(x1, y1, x2, y2));
+}
+
+
+/*
+CO7 - Activity Set 3 - P5
+
+Write a program to find the nCr of given n and r.
+
+Function Declarations
+void input_n_and_r(int *n, int *r);
+int nCr(int n, int r);
+void output(int n, int r, int result);
+
+Input
+6
+3
+
+Output
+for n = 6 and r = 3, nCr = 20
+*/
+
+void input_n_and_r(int *n, int *r)
+{
+    printf("Enter n: ");
+    scanf("%d",n);
+    printf("r: ");
+    scanf("%d",r);
+}
+
+int factorial(int n)
+{
+    int f = 1;
+    while(n)
+    {
+        f *= n;
+        n--;
+    }
+    return f;
+}
+
+int nCr(int n, int r)
+{
+    return (factorial(n) / (factorial(r) * factorial(n - r)));
+}
+
+void output(int n, int r, int result)
+{
+    printf("For n = %d and r = %d, nCr = %d",n,r,result);
+}
+
+int main()
+{
+    int n, r;
+    input_n_and_r(&n,&r);
+    output(n,r,nCr(n,r));
+}
+
+
