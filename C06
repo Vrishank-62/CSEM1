@@ -1,0 +1,283 @@
+/*
+CO6 - Activity Set 1 - Program 1
+
+Write a program to read a name from the keyboard and
+display message Hello onto the monitor”.
+*/
+
+int main()
+{
+    char str[30];
+    printf("Enter a string: ");
+    gets(str);
+    puts("Hello");
+    puts(str);
+}
+
+
+/*
+CO6 - Activity Set 1 - Program 2
+
+Write a program to display the string “UNIX” in the
+following format.
+U
+UN
+UNI
+UNIX
+UNIX
+UNI
+UN
+U
+*/
+
+int main()
+{
+    char *str = "UNIX";
+    int flag = 0;
+    int x = strlen(str);
+    for(int i = 0; i < 2*strlen(str); i++)
+    {
+        for(int j = 0; flag && j < x; j++)
+            printf("%c",str[j]);
+
+        if(flag)
+            x--;
+
+        for(int j = 0; !flag && j <= i; j++)
+            printf("%c",str[j]);
+
+        if(i == strlen(str) - 1)
+            flag = 1;
+
+        printf("\n");
+    }
+}
+
+
+/*
+CO6 - Activity Set 1 - Program 3
+
+Write a program to initialize 3 names in an array of
+strings and display them on to monitor.
+*/
+
+int main()
+{
+    int n = 3;
+    char str[n][30];
+    for(int i = 0; i < n; i++)
+    {
+        printf("Enter string %d: ",i + 1);
+        scanf(" ");
+        gets(str[i]);
+    }
+    printf("\nEntered strings are...\n");
+    for(int i = 0; i < n; i++)
+        puts(str[i]);
+
+    char str1[3][30] = {"Hello, How are you?","I am fine.","Have a good day."};
+    printf("\nInitialized strings are...\n");
+    for(int i = 0; i < n; i++)
+        puts(str1[i]);
+}
+
+
+/*
+CO6 - Activity Set 1 - Program 4
+
+Write a program to read a string from the keyboard
+and to display the length of the string on to the monitor
+by using with and without strlen( ) function.
+*/
+
+#include<stdio.h>
+#define SIZE 25
+int main()
+{
+    int i, length = 0;
+    char name[SIZE];
+    printf("Enter a string: ");
+    //scanf("%s", name);
+    gets(name);
+    printf("Name = %s\n", name);
+    for (i=0; name[i]!='\0'; i++)
+            length++;
+    printf("Length with library function = %d\n", strlen(name));
+    printf("Length without library function = %d\n", length);
+    return 0;
+}
+
+
+/*
+CO6 - Activity Set 1 - Program 5
+
+Write a program to compare two strings using string
+compare function
+*/
+
+#include<stdio.h>
+
+int main()
+{
+    int i;
+    char str1[30], str2[30];
+    printf("Enter string 1: ");
+    gets(str1);
+    printf("Enter string 2: ");
+    scanf(" ");
+    gets(str2);
+
+    printf("String 1 compared with String 1: %d",strcmp(str1,str1));
+    printf("\nString 1 compared with String 2: %d",strcmp(str1,str2));
+    printf("\nString 2 compared with String 1: %d",strcmp(str2,str1));
+    return 0;
+}
+
+
+/*
+CO6 - Activity Set 1 - Program 6
+
+Write a program to convert the string into
+lower case / upper case characters using an in-built function.
+*/
+
+#include<stdio.h>
+
+int main()
+{
+    char str1[10],str2[10];
+    printf("Enter str1 in uppercase:");
+    gets(str1);
+    puts("\nUsing tolower...");
+    for(int i = 0; i <= strlen(str1); i++)
+        printf("%c",tolower(str1[i]));
+
+    printf("\n\nEnter str2 in lowercase:");
+    gets(str2);
+    puts("\nUsing toupper...");
+    for(int i = 0; i <= strlen(str2); i++)
+        printf("%c",toupper(str2[i]));
+    return 0;
+}
+
+
+/*
+CO6 - Activity Set 1 - Program 7
+
+Write a program to convert the string into
+lower case / upper case characters using an in-built function.
+*/
+
+int main()
+{
+    char str1[10],str2[10];
+    printf("Enter str1:");
+    gets(str1);
+
+    printf("\nInitial str1 = %s\n",str1);
+    printf("Reversed str1 using library function = %s",strrev(str1));
+    printf("\nUpdated str1 = %s",str1);
+
+    for(int i = 0; i <= strlen(str1)/2; i++)
+    {
+        char a = str1[strlen(str1) - 1 - i];
+        str1[strlen(str1) - 1 - i] = str1[i];
+        str1[i] = a;
+    }
+    printf("\nRe-reversed str1 without library function = %s\n",str1);
+}
+
+
+/*
+CO6 - Activity Set 1 - Program 8
+
+Program to concatenate two strings with and without using
+the strcat() function.
+*/
+
+int main()
+{
+    char str1[10],str2[10];
+    printf("Enter str1: ");
+    gets(str1);
+
+    printf("Enter str2: ");
+    scanf(" ");
+    gets(str2);
+
+    char str3[strlen(str1)+strlen(str2) + 1];
+    int i;
+    for(i = 0; i <= strlen(str1); i++)
+        str3[i] = str1[i];
+    i--;
+    for(int j = 0; j <= strlen(str2); j++,i++)
+        str3[i] = str2[j];
+    str3[i] = '\0';
+    printf("\nConcatenation without library function = %s",str3);
+
+    printf("\nstrcat(%s,%s) = ",str1,str2);
+    printf("%s",strcat(str1,str2));
+}
+
+
+/*
+CO6 - Activity Set 1 - Program 9
+
+Develop a C program to find the frequency of characters
+in a string.
+*/
+
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+int main()
+{
+    char str[100];
+    char charInStr[] = {"abcdefghijklmnopqrstuvwxyz"};
+    int freq[26] = {0};
+    printf("Enter a string: ");
+    scanf("%[^\n]",str);
+    for(int i = 0; i < strlen(str); i++)
+    {
+        for(int j = 0; j < strlen(charInStr); j++)
+        {
+            if(str[i] == charInStr[j])
+                freq[j]++;
+        }
+    }
+    for(int i = 0; i < strlen(charInStr); i++)
+    {
+        if(freq[i] != 0)
+            printf("Frequency of character %c is %d\n",charInStr[i],freq[i]);
+    }
+    return 0;
+}
+CO6_AS1_P9.c
+Displaying CO6_AS1_P9.c.
+
+
+
+/*
+CO6 - Activity Set 1 - Program 10
+
+Write a C program to convert integer to string using
+inbuilt function.
+*/
+
+int main()
+{
+    int num;
+    char *snum;
+
+    printf("Enter a number: ");
+    scanf("%d",&num);
+
+    itoa(num, snum, 10);
+
+    printf("Number converted to string = %s\n", snum);
+}
+
+
+
