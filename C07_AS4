@@ -1,0 +1,325 @@
+/*
+CO7 - Activity Set 4 - P1
+
+Write a program in C to calculate the sum of numbers
+from 1 to n using recursion.
+
+Test Data :
+Input the last number of the range starting from 1 : 5
+
+Expected Output:
+The sum of numbers from 1 to 5 : 15
+*/
+
+int sum(int n)
+{
+    if(n)
+        return n + sum(n-1);
+}
+int main()
+{
+    int n;
+    printf("Input the last number of the range starting from 1: ");
+    scanf("%d",&n);
+    printf("The sum of numbers from 1 to %d: %d",n,sum(n));
+}
+
+
+/*
+CO7 - Activity Set 4 - P2
+
+Write a program in C to print the Fibonacci Series using
+recursion.
+
+Test Data :
+Input number of terms for the Series: 11
+
+Expected Output:
+The Series is 0  1  1  2  3  5  8  13  21  34  55
+*/
+
+int fibonacci(int t, int n, int a, int b)
+{
+    if(t <= n)
+    {
+        printf("%d ", a);
+        fibonacci(t + 1,n,b,a + b);
+    }
+}
+
+int main()
+{
+    int n;
+    printf("Enter the value of n: ");
+    scanf("%d",&n);
+    fibonacci(1,n,0,1);
+}
+
+
+/*
+CO7 - Activity Set 4 - P3
+
+Write a program in C to print the array elements using recursion.
+
+Test Data :
+Input the number of elements to be stored in the array: 6
+
+Input 6 elements in the array :
+element - 0 : 2
+element - 1 : 4
+element - 2 : 6
+element - 3 : 8
+element - 4 : 10
+element - 5 : 12
+
+Expected Output :
+The elements in the array are : 2  4  6  8  10  12
+*/
+
+void print(int *a, int beg, int end)
+{
+    if(beg < end)
+    {
+        printf("%d ",a[beg]);
+        print(a,beg+1,end);
+    }
+}
+int main()
+{
+    int n;
+    printf("Input the number of elements to be stored in the array: ");
+    scanf("%d",&n);
+    int a[n];
+    printf("Input %d elements in the array...\n",n);
+    for(int i = 0; i < n; i++)
+    {
+        printf("Element - %d: ", i + 1);
+        scanf("%d",&a[i]);
+    }
+    printf("The elements in the array are: ");
+    print(a,0,n);
+}
+
+
+/*
+CO7 - Activity Set 4 - P5
+
+Write a program in C to count the digits of a given
+number using recursion.
+
+Test Data :
+Input a number : 50
+
+Expected Output :
+The number of digits in the number is :  2
+*/
+
+int countDigit(int n)
+{
+    if(n)
+        return 1 + countDigit(n/10);
+}
+int main()
+{
+    int n;
+    printf("Input a number: ");
+    scanf("%d",&n);
+    printf("The number of digits in the number is: %d",countDigit(n));
+}
+
+
+/*
+CO7 - Activity Set 4 - P6
+
+Write a program in C to find the sum of digits of a number
+using recursion.
+
+Test Data :
+Input any number to find sum of digits: 25
+
+Expected Output:
+The Sum of digits of 25 = 7
+*/
+
+int sumDigit(int n)
+{
+    if(n)
+        return n%10 + sumDigit(n/10);
+}
+int main()
+{
+    int n;
+    printf("Input any number to find sum of digits: ");
+    scanf("%d",&n);
+    printf("The Sum of digits of %d = %d",n,sumDigit(n));
+}
+
+
+/*
+CO7 - Activity Set 4 - P7
+
+Write a program in C to reverse a string using recursion.
+
+Test Data :
+Input any string: cprogram
+
+Expected Output:
+The reversed string is: margorpc
+*/
+void print(char *s)
+{   if(*s)
+    {   print(s + 1);
+        printf("%c",*s);
+    }
+}
+int main()
+{   char str[100];
+    printf("Input any string: ");
+    gets(str);
+    printf("The reversed string is: ");
+    print(str);
+}
+
+
+/*
+CO7 - Activity Set 4 - P8
+
+Write a program in C to print even or odd numbers
+in a given range using recursion.
+
+Test Data :
+Input the range to print starting from 1 : 10
+
+Expected Output :
+All even numbers from 1 to 10 are : 2  4  6  8  10
+All odd numbers from 1 to 10 are : 1  3  5  7  9
+*/
+
+void printEven(int a, int n)
+{
+    if(a <= n)
+    {
+        if(a % 2 == 0)
+            printf("%d ",a);
+        printEven(a + 1, n);
+    }
+}
+void printOdd(int a, int n)
+{
+    if(a <= n)
+    {
+        if(a % 2)
+            printf("%d ",a);
+        printOdd(a + 1, n);
+    }
+}
+int main()
+{
+    int n;
+    printf("Input the range to print starting from 1: ");
+    scanf("%d",&n);
+    printf("All even numbers from 1 to %d are: ",n);
+    printEven(1,n);
+    printf("\nAll odd numbers from 1 to %d are: ",n);
+    printOdd(1,n);
+}
+
+
+/*
+CO7 - Activity Set 4 - Home Assignment 1
+
+Write a program in C to find the GCD of two numbers
+using recursion.
+
+Test Data :
+Input 1st number: 10
+Input 2nd number: 50
+
+Expected Output :
+The GCD of 10 and 50 is: 10
+*/
+
+int gcd(int a, int b)
+{
+    if(b)
+        return gcd(b,a%b);
+}
+
+int main()
+{
+    int a, b;
+    printf("Input first number: ");
+    scanf("%d",&a);
+    printf("Input second number: ");
+    scanf("%d",&b);
+    printf("GCD of %d and %d is %d",a,b,gcd(a,b));
+}
+
+
+/*
+CO7 - Activity Set 4 - Home Assignment 2
+
+Write a program in C to find the Factorial of a number
+using recursion.
+
+Test Data :
+Input a number : 5
+
+Expected Output:
+The Factorial of 5 is : 120
+*/
+
+int factorial(int n)
+{
+    if(n)
+        return (n * factorial(n - 1));
+    return 1;
+}
+
+int main()
+{
+    int a;
+    printf("Input a number: ");
+    scanf("%d",&a);
+    printf("The factorial of %d is %d.",a,factorial(a));
+}
+
+
+/*
+CO7 - Activity Set 4 - Home Assignment 3
+
+Write a C program to check whether a given string
+is a palindrome or not using recursion.
+
+Test Data :
+Input a word to check for palindrome : mom
+
+Expected Output :
+The entered word is a palindrome.
+*/
+
+int pallindrome(char *a, int i, int n)
+{
+    if(i > n)
+        return 0;
+    else if(i <= n && a[i] == a[n])
+    {
+        pallindrome(a,i+1,n-1);
+        return 1;
+    }
+    else
+        return 0;
+}
+
+int main()
+{
+    char *str;
+    printf("Input a word to check for palindrome: ");
+    gets(str);
+    if(pallindrome(str,0,strlen(str)-1))
+        printf("%s is a palindrome.",str);
+    else
+        printf("%s is not a palindrome.",str);
+}
+
+
