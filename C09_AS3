@@ -1,0 +1,152 @@
+/*
+CO9 - Activity Set 3 - P1
+
+C program to input and print variables of a nested structure.
+The Employee (depended structure) and another structure
+called Organisation(Outer structure).
+
+The structure Organisation has the data members like:
+organisation_name,
+organisation_number.
+
+The Employee structure is nested inside the structure
+Organisation and it has the data members like:
+employee_id,
+name,
+salary.
+
+This program will demonstrate example of Nested Structure
+in C language, how to define, declare and access the
+nested structure.
+*/
+
+struct Employee
+{
+    int employee_id;
+    char name[25];
+    float salary;
+};
+
+struct Organisation
+{
+    char organisation_name[25];
+    int organisation_number;
+    struct Employee e;
+};
+
+struct Organisation input()
+{
+    struct Organisation o;
+    printf("Enter organisation name: ");
+    scanf(" %[^\n]%*c",&o.organisation_name);
+    printf("Enter organisation number: ");
+    scanf("%d",&o.organisation_number);
+    printf("Enter employee ID: ");
+    scanf("%d",&o.e.employee_id);
+    printf("Enter employee name: ");
+    scanf(" %[^\n]%*c",&o.e.name);
+    printf("Enter employee salary: ");
+    scanf("%f",&o.e.salary);
+    return o;
+}
+
+void display(struct Organisation o)
+{
+    printf("\nOrganisation name: %s", o.organisation_name);
+    printf("\nOrganisation number: %d", o.organisation_number);
+    printf("\nEmployee ID: %d", o.e.employee_id);
+    printf("\nEmployee name: %s", o.e.name);
+    printf("\nEmployee salary: %0.2f", o.e.salary);
+}
+
+int main()
+{
+    struct Organisation o = input();
+    display(o);
+}
+
+
+/*
+CO9 - Activity Set 3 - P2
+
+C program to demonstrate example structure pointer
+(structure with pointer). Take input and print a structure
+Student which has following fields:
+roll_no,
+name,
+branch, and
+batch.
+
+This program will demonstrate example of pointer to structure,
+structure pointer in C.
+*/
+
+struct Student
+{
+    int rollNumber;
+    char name[25], branch[4], batch[3];
+};
+
+int main()
+{
+    struct Student *s;
+
+    printf("Enter roll number: ");
+    scanf("%d",&s->rollNumber);
+    printf("Enter name: ");
+    scanf(" %[^\n]%*c",&s->name);
+    printf("Enter branch: ");
+    scanf(" %[^\n]%*c",&s->branch);
+    printf("Enter batch: ");
+    scanf(" %[^\n]%*c",&s->batch);
+
+    printf("\nRoll number: %d",s->rollNumber);
+    printf("\nName: %s", s->name);
+    printf("\nBranch: %s", s->branch);
+    printf("\nBatch: %s", s->batch);
+}
+
+
+/*
+CO9 - Activity Set 3 - P3
+
+Write a similar C program as in Q2 using user define function.
+
+This program will demonstrate example of pointer to
+structure, structure pointer using USER DEFINE FUNCTION in C.
+*/
+
+struct Student
+{
+    int rollNumber;
+    char name[25], branch[4], batch[3];
+};
+
+void input(struct Student *s)
+{
+    printf("Enter roll number: ");
+    scanf("%d",&s->rollNumber);
+    printf("Enter name: ");
+    scanf(" %[^\n]%*c",&s->name);
+    printf("Enter branch: ");
+    scanf(" %[^\n]%*c",&s->branch);
+    printf("Enter batch: ");
+    scanf(" %[^\n]%*c",&s->batch);
+}
+
+void display(struct Student *s)
+{
+    printf("\nRoll number: %d",s->rollNumber);
+    printf("\nName: %s", s->name);
+    printf("\nBranch: %s", s->branch);
+    printf("\nBatch: %s", s->batch);
+}
+
+int main()
+{
+    struct Student s;
+    input(&s);
+    display(&s);
+}
+
+
